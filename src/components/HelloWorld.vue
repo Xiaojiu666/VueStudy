@@ -1,10 +1,7 @@
 <script setup>
-defineProps({
-  msg: {
-    type: String,
-    required: true
-  }
-})
+import { ref, reactive, computed } from 'vue'
+
+const bookList = reactive([{ bookName: 'Math', bookName: 'English' }])
 </script>
 
 <template>
