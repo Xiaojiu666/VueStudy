@@ -1,63 +1,67 @@
 <script setup>
 import { ref, reactive, computed } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
-
-const count = ref(0)
-
-const isActive = ref(true)
-const hasError = ref(true)
-
-const author = reactive({
-  name: 'John Doe',
-  books: ['Vue 2 - Advanced Guide', 'Vue 3 - Basic Guide', 'Vue 4 - The Mystery']
-})
-const publishedBooksMessage = computed(() => {
-  return author.books.length > 0 ? 'Yes' : 'No'
-})
-
-function increment() {
-  count.value++
-  isActive.value = !isActive.value
-  hasError.value = !hasError.value
-}
-
-function deleteValue() {
-  count.value--
-}
 </script>
 
 <template>
-  <button @click="increment">Count increment : {{ count }}</button>
-  <button @click="deleteValue">Count delete: {{ count }}</button>
-  <span>{{ publishedBooksMessage }}</span>
-
-  <div class="static" :class="{ active: isActive, tColor: hasError }">AAAAAA</div>
-
-  <span v-if="isActive">This is span</span>
-  <span v-else>Oh no 😢</span>
-
-  <nav>
-    <RouterLink to="/">Home</RouterLink>
-    <RouterLink to="/studyList">StudyList</RouterLink>
-  </nav>
-  <RouterView style="margin-top: 100px" />
+  <div class="container">
+    <div class="row">
+      <nav>
+        <RouterLink class="link" to="/">Home</RouterLink>
+        <RouterLink class="link" to="/studyList">StudyList</RouterLink>
+      </nav>
+    </div>
+    <div class="row">
+      <RouterView style="margin-top: 100px" />
+    </div>
+  </div>
 </template>
 
 <style scoped>
-button {
-  font-weight: bold;
+.link {
+  padding: 12px;
+}
+
+#app {
+  margin: 0; /* 移除默认的外边距 */
+  padding: 0; /* 移除默认的内边距 */
+}
+
+.container {
+  width: 100vw; /* 设置容器宽度为视口宽度 */
+  max-width: 100vw;
+  margin: 0; /* 移除默认的外边距 */
+  padding: 0; /* 移除默认的内边距 */
+  height: 100vh; /* 设置容器高度为视口高度 */
+  display: flex; /* 使用flex布局 */
+  align-items: flex-start; /* 将内容对齐到顶部 */
+  justify-content: flex-start; /* 将内容对齐到左侧 */
+  justify-content: flex-start; /* 将内容对齐到左侧 */
+  flex-direction: column;
+}
+
+.row {
+  display: flex; /* 使用flex布局 */
+  flex-direction: row; /* 子元素水平排列 */
+  width: 100%; /* 行的宽度为100% */
+  margin: 0; /* 移除行的默认外边距 */
+  padding: 0; /* 移除行的默认内边距 */
+}
+
+nav {
+  display: flex; /* 使用flex布局 */
+  flex-direction: row; /* 子元素水平排列 */
+  width: 100%; /* 导航栏的宽度为100% */
+}
+
+.column {
+  flex: 1; /* 设置每列占据的空间比例，使每列均匀分布 */
+  border: 1px solid #000; /* 添加1像素的黑色实线边框 */
+  padding: 10px; /* 添加10像素的内边距 */
+  box-sizing: border-box; /* 确保内边距和边框包含在元素的总宽度和高度内 */
 }
 </style>
 
-<style scoped>
-.active {
-  display: block;
-  margin: 0 auto 2rem;
-}
-.tColor {
-  background-color: red;
-}
-</style>
 <!-- <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
